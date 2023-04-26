@@ -1,0 +1,30 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Description: > 
+  Este template es de prueba
+Resources:
+  WEBSERVER1:
+    Type: 'AWS::EC2::Instance'
+    Properties:
+      ImageId: "ami-04f1014c8adcfa670"
+      KeyName: "servercurso"
+      InstanceType: "t2.micro"
+        
+      SecurityGroupIds:
+        - Ref: SecurityGroupSSH
+         
+  SecurityGroupSSH:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: "Security Group para acceso por SSH"
+      VpcId: "vpc-9ff29ef9"
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+      SecurityGroupEgress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
